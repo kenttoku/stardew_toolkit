@@ -19,6 +19,8 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+# Use Bootstrap for CSS framework
+gem 'bootstrap-sass', '~> 3.3.7'
 
 group :production do
    gem 'pg'
