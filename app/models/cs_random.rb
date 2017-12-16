@@ -1,5 +1,9 @@
+# Stardew Valley utilizes the C# pseudorandom number generator (PRNG)
+# PRNG returns the exact same results every time, allowing the user to predict "random" events that occur in the game
+# This may change in future versions of the game
+
 class CsRandom < ApplicationRecord
-	attr_accessor :inext, :inextp, :seed_array
+	attr_accessor :seed, :inext, :inextp, :seed_array
 
 	# Constants
 	INT_MIN = -2147483648
@@ -30,6 +34,7 @@ class CsRandom < ApplicationRecord
 	  	end
 	  end
 
+		@seed = seed
 	  @inext = 0
 	  @inextp = 21
 	end
