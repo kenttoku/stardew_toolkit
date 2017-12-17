@@ -1,17 +1,39 @@
 <h1>Mines</h1>
 <p>Finds the special floors in the mines</p>
 <p>
-	Monster: <% @monster.each do |level| %>
-		<%= level %>
-	<% end %>	
-
-	<br>
-	Slime: <% @slime.each do |level| %>
-		<%= level %>
-	<% end %>	
-
-	<br>
-	Mushroom: <% @mushroom.each do |level| %>
-		<%= level %>
-	<% end %>	
+	<div class="row">
+    <div class="col-md-12">
+      <table class="table-bordered table-striped">
+        <thead>
+          <tr>
+            <th colspan="7" class="text-center">
+              <span class="btn-group">
+              	<a class="btn active">Spring Y-01</a>
+              </span>
+            </th>
+          </tr>
+          <tr>
+            <th class="col-md-1">Mo</th>
+            <th class="col-md-1">Tu</th>
+            <th class="col-md-1">We</th>
+            <th class="col-md-1">Th</th>
+            <th class="col-md-1">Fr</th>
+            <th class="col-md-1">Sa</th>
+            <th class="col-md-1">Su</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% (1..28).each do |day| %>
+            <% if day % 7 == 1 %>
+              <tr>
+            <% end %>
+                <th><%= render partial: 'tools/floors', locals: {game_id: @game_id, day: day} %></th>
+            <% if day % 7 == 0 %>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+	</div>
 </p>

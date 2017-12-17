@@ -1,0 +1,19 @@
+<%= day %>
+
+<br>
+
+Monster: <% monster(@game_id, day).each do |level| %>
+	<%= level %>
+<% end %>	
+
+<br>
+
+Slime: <% slime(@game_id, day).each do |level| %>
+	<%= level %>
+<% end %>	
+
+<br>
+
+Mushroom: <% mushroom(@game_id, day).each do |level| %>
+	<%= level %>
+<% end %>	
