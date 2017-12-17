@@ -1,11 +1,9 @@
 <h1>Mines</h1>
 <p>Finds the special floors in the mines</p>
 <p>
-	<%= render partial: 'tools/floors', locals: {monster: @monster, slime: @slime, mushroom: @mushroom} %>
-
 	<div class="row">
     <div class="col-md-12">
-  		<table class="table-bordered table-striped">
+      <table class="table-bordered table-striped">
         <thead>
           <tr>
             <th colspan="7" class="text-center">
@@ -25,45 +23,15 @@
           </tr>
         </thead>
         <tbody>
-        	<tr>
-        		<th>
-        			1 <br>
-        			<%= render partial: 'tools/floors', locals: {monster: @monster, slime: @slime, mushroom: @mushroom} %>	
-        		</th>
-        		<th>2</th>
-        		<th>3</th>
-        		<th>4</th>
-        		<th>5</th>
-        		<th>6</th>
-        		<th>7</th>
-        	</tr>
-        	<tr>
-        		<th>8</th>
-        		<th>9</th>
-        		<th>10</th>
-        		<th>11</th>
-        		<th>12</th>
-        		<th>13</th>
-        		<th>14</th>
-        	</tr>
-        	<tr>
-        		<th>15</th>
-        		<th>16</th>
-        		<th>17</th>
-        		<th>18</th>
-        		<th>19</th>
-        		<th>20</th>
-        		<th>21</th>
-        	</tr>
-        	<tr>
-        		<th>22</th>
-        		<th>23</th>
-        		<th>24</th>
-        		<th>25</th>
-        		<th>26</th>
-        		<th>27</th>
-        		<th>28</th>
-        	</tr>
+          <% (1..28).each do |day| %>
+            <% if day % 7 == 1 %>
+              <tr>
+            <% end %>
+                <th><%= render partial: 'tools/floors', locals: {game_id: @game_id, day: day} %></th>
+            <% if day % 7 == 0 %>
+              </tr>
+            <% end %>
+          <% end %>
         </tbody>
       </table>
     </div>
