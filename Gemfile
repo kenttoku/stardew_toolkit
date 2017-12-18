@@ -21,6 +21,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # Use Bootstrap for CSS framework
 gem 'bootstrap-sass', '~> 3.3.7'
+# For Save Game Upload
+gem "paperclip", '~> 5.0.0'
 
 group :production do
    gem 'pg'

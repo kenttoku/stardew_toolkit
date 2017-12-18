@@ -7,9 +7,16 @@
         <thead>
           <tr>
             <th colspan="7" class="text-center">
-              <span class="btn-group">
-              	<a class="btn active">Spring Y-01</a>
-              </span>
+              <%= link_to " ", '#', class: 'glyphicon glyphicon-chevron-left' %>
+            	<a class="btn active">Year <%= @year %></a>
+              <%= link_to " ", '#', class: 'glyphicon glyphicon-chevron-right' %>
+            </th>
+          </tr>
+          <tr>
+            <th colspan="7" class="text-center">
+              <%= link_to " ", '#', class: 'glyphicon glyphicon-chevron-left' %>
+              <a class="btn active">Season</a>
+              <%= link_to " ", '#', class: 'glyphicon glyphicon-chevron-right' %>
             </th>
           </tr>
           <tr>
@@ -27,7 +34,7 @@
             <% if day % 7 == 1 %>
               <tr>
             <% end %>
-                <th><%= render partial: 'tools/floors', locals: {game_id: @game_id, day: day} %></th>
+              <th><%= render partial: 'tools/floors', locals: {game_id: @game_id, day: day} %></th>
             <% if day % 7 == 0 %>
               </tr>
             <% end %>
