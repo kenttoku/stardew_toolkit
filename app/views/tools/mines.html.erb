@@ -1,5 +1,6 @@
 <h1>Mines</h1>
 <p>Finds the special floors in the mines</p>
+<%= @calendar.day %>
 <p>
 	<div class="row">
     <div class="col-md-12">
@@ -7,16 +8,20 @@
         <thead>
           <tr>
             <th colspan="7" class="text-center">
-              <%= link_to " ", '#', class: 'glyphicon glyphicon-chevron-left' %>
-            	<a class="btn active">Year <%= @year %></a>
-              <%= link_to " ", '#', class: 'glyphicon glyphicon-chevron-right' %>
+              <% if @calendar.day > 112 %>
+                <%= link_to " ", down_year_calendars_path, :method=> :post, class: 'glyphicon glyphicon-chevron-left text-right' %>
+              <% end %>
+            	<span>Year <%= year(@calendar.day) %></span>
+              <%= link_to " ", up_year_calendars_path, :method=> :post, class: 'glyphicon glyphicon-chevron-right text-left' %>
             </th>
           </tr>
           <tr>
             <th colspan="7" class="text-center">
-              <%= link_to " ", '#', class: 'glyphicon glyphicon-chevron-left' %>
-              <a class="btn active">Season</a>
-              <%= link_to " ", '#', class: 'glyphicon glyphicon-chevron-right' %>
+              <% if @calendar.day > 28 %>
+                <%= link_to " ", down_season_calendars_path, :method=> :post, class: 'glyphicon glyphicon-chevron-left text-right' %>
+              <% end %>
+              <span><%= season(@calendar.day) %></span>    
+              <%= link_to " ", up_season_calendars_path, :method=> :post, class: 'glyphicon glyphicon-chevron-right text-left' %>
             </th>
           </tr>
           <tr>

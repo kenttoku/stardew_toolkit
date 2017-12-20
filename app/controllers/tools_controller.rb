@@ -3,7 +3,10 @@ class ToolsController < ApplicationController
   end
 
   def mines
-    @year = 1
+    @calendar = Calendar.first
+    if @calendar.day % 28 != 1
+      @calendar.day -= (@calendar.day % 28 - 1)
+    end
   	# # Temporary Numbers for testing
   	@game_id = 123456789
   end
