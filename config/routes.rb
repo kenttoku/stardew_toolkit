@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get 'tools/mines'
 
+  get 'tools/cart'
+
   resource :calendars do
   	post :up_year, :down_year, :up_season, :down_season
   end

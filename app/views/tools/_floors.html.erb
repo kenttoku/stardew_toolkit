@@ -1,4 +1,4 @@
-<%= day %><br />
+<%= day + 1 %><br />
 Monster: <%= monster(@game_id, day + @calendar.day) == [] ? "None" : monster(@game_id, day + @calendar.day).join(", ") %><br />
 Slime: <%= slime(@game_id, day + @calendar.day) == [] ? "None" : slime(@game_id, day + @calendar.day).join(", ") %><br />
 Mushroom: <%= mushroom(@game_id, day + @calendar.day) == [] ? "None" : mushroom(@game_id, day + @calendar.day).join(", ") %><br />

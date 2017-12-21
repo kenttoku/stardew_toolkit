@@ -51,4 +51,31 @@ module ToolsHelper
 		end
 		mushroom
 	end
+
+	def cart_stock(game_id, day)
+		stock = []
+		if day % 7 == 5 || day % 7 == 0
+			rng = CsRandom.new(game_id + day)
+			(1..10).each do |i|
+				index2 = rng.next(2, 790)
+				loop do
+					loop do
+						index2 = (index2 + 1) % 790
+						break if !(off_limits_for_sale.include? index2) # || Game1.objectInformation.ContainsKey(index2)
+					end
+					break # unless (!strArray[3].Contains<char>('-') || Convert.ToInt32(strArray[1]) <= 0 || (strArray[3].Contains("-13") || strArray[3].Equals("Quest")) || (strArray[0].Equals("Weeds") || strArray[3].Contains("Minerals") || strArray[3].Contains("Arch")))
+				end
+				stock << index2
+				#Implement price later. RNG still required to run to find next item value.
+				rng.next
+				rng.next
+				rng.next_double
+			end
+		end
+		stock
+	end
+
+	def off_limits_for_sale
+    [680, 681, 682, 688, 689, 690, 774, 775, 454, 460, 645, 413, 437, 439, 158, 159, 160, 161, 162, 163, 326, 341]
+  end
 end
