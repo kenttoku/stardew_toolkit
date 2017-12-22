@@ -54,6 +54,7 @@ module ToolsHelper
 
 	def cart_stock(game_id, day)
 		stock = []
+		items = Item.all
 		if day % 7 == 5 || day % 7 == 0
 			rng = CsRandom.new(game_id + day)
 			(1..10).each do |i|
@@ -61,9 +62,10 @@ module ToolsHelper
 				loop do
 					loop do
 						index2 = (index2 + 1) % 790
-						break if !(off_limits_for_sale.include? index2) # || Game1.objectInformation.ContainsKey(index2)
+						break if !(off_limits_for_sale.include? index2) && (Item.find_by item_key: index2)
 					end
-					break # unless (!strArray[3].Contains<char>('-') || Convert.ToInt32(strArray[1]) <= 0 || (strArray[3].Contains("-13") || strArray[3].Equals("Quest")) || (strArray[0].Equals("Weeds") || strArray[3].Contains("Minerals") || strArray[3].Contains("Arch")))
+					str_array = Item.find_by(item_key: index2).information.split('/')
+					break unless !(str_array[3].include? "-") || (str_array[1].to_i <= 0) || (str_array[3].include? "-13") || (str_array[3] == "Quest") || (str_array[0] == "Weeds") || (str_array[3].include? "Minerals") || (str_array[3].include? "Arch")
 				end
 				stock << index2
 				#Implement price later. RNG still required to run to find next item value.
@@ -73,6 +75,15 @@ module ToolsHelper
 			end
 		end
 		stock
+	end
+
+	def format_items(item_keys)
+		names = []
+		item_keys.each do |item_key|
+			str_array = Item.find_by(item_key: item_key).information.split('/')
+			names << str_array[0]
+		end
+		names
 	end
 
 	def off_limits_for_sale

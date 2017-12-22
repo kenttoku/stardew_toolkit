@@ -1,2 +1,2 @@
 <%= day + 1 %><br />
-<%= cart_stock(@game_id, day + @calendar.day).join(", ") %>
+<%= format_items(cart_stock(@game_id, day + @calendar.day)).join(", ") %>
