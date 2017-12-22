@@ -1,5 +1,5 @@
-<h1>Mines</h1>
-<p>Finds the special floors in the mines</p>
+<h1>Traveling Merchant Stock</h1>
+<p>Fines the Merchant Stock</p>
 <%= @calendar.day %>
 <p>
 	<div class="row">
@@ -39,7 +39,7 @@
             <% if day % 7 == 0 %>
               <tr>
             <% end %>
-              <th><%= render partial: 'tools/floors', locals: {game_id: @game_id, day: day} %></th>
+              <th><%= render partial: 'tools/stock', locals: {game_id: @game_id, day: day} %></th>
             <% if day % 7 == 6 %>
               </tr>
             <% end %>

@@ -51,4 +51,40 @@ module ToolsHelper
 		end
 		mushroom
 	end
+
+	def cart_stock(game_id, day)
+		stock = []
+		items = Item.all
+		if day % 7 == 5 || day % 7 == 0
+			rng = CsRandom.new(game_id + day)
+			(1..10).each do |i|
+				item_info = []
+				item_key = rng.next(2, 790)
+				loop do
+					loop do
+						item_key = (item_key + 1) % 790
+						break if !(off_limits_for_sale.include? item_key) && (Item.find_by item_key: item_key)
+					end
+					str_array = Item.find_by(item_key: item_key).information.split('/')
+					break unless !(str_array[3].include? "-") || (str_array[1].to_i <= 0) || (str_array[3].include? "-13") || (str_array[3] == "Quest") || (str_array[0] == "Weeds") || (str_array[3].include? "Minerals") || (str_array[3].include? "Arch")
+				end
+				str_array = Item.find_by(item_key: item_key).information.split('/')
+				item_info << get_item_name(item_key)
+				item_info << [rng.next(1, 11) * 100, str_array[1].to_i * rng.next(3, 6)].max
+				item_info << (rng.next_double < 0.1 ? 5 : 1)
+				stock << item_info
+			end
+		end
+		stock
+	end
+
+	def get_item_name(item_key)
+		str_array = Item.find_by(item_key: item_key).information.split('/')
+		str_array[0]
+	end
+
+
+	def off_limits_for_sale
+    [680, 681, 682, 688, 689, 690, 774, 775, 454, 460, 645, 413, 437, 439, 158, 159, 160, 161, 162, 163, 326, 341]
+  end
 end

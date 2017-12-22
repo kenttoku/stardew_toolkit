@@ -1,0 +1,4 @@
+<%= day + 1 %><br />
+<% cart_stock(@game_id, day + @calendar.day).each do |item_info| %>
+	<%= item_info %><br />
+<% end %>
