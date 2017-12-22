@@ -1,5 +1,5 @@
 <h1>Traveling Merchant Stock</h1>
-<p>Fines the Merchant Stock</p>
+<p>Finds the Merchant Stock</p>
 <%= @calendar.day %>
 <p>
 	<div class="row">
@@ -25,19 +25,15 @@
             </th>
           </tr>
           <tr>
-            <th class="col-md-1">Mo</th>
-            <th class="col-md-1">Tu</th>
-            <th class="col-md-1">We</th>
-            <th class="col-md-1">Th</th>
-            <th class="col-md-1">Fr</th>
-            <th class="col-md-1">Sa</th>
-            <th class="col-md-1">Su</th>
+            <th class="col-md-1">Week</th>
+            <th class="col-md-3">Friday</th>
+            <th class="col-md-3">Sunday</th>
           </tr>
         </thead>
         <tbody>
-          <% (0..27).each do |day| %>
-            <% if day % 7 == 0 %>
-              <tr>
+          <% [5, 7, 12, 14, 19, 21, 26, 28].each do |day| %>
+            <% if day % 7 == 5 %>
+              <tr><th>Week <%= day / 7 + 1 %>
             <% end %>
               <th><%= render partial: 'tools/stock', locals: {game_id: @game_id, day: day} %></th>
             <% if day % 7 == 6 %>
