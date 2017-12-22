@@ -58,33 +58,31 @@ module ToolsHelper
 		if day % 7 == 5 || day % 7 == 0
 			rng = CsRandom.new(game_id + day)
 			(1..10).each do |i|
-				index2 = rng.next(2, 790)
+				item_info = []
+				item_key = rng.next(2, 790)
 				loop do
 					loop do
-						index2 = (index2 + 1) % 790
-						break if !(off_limits_for_sale.include? index2) && (Item.find_by item_key: index2)
+						item_key = (item_key + 1) % 790
+						break if !(off_limits_for_sale.include? item_key) && (Item.find_by item_key: item_key)
 					end
-					str_array = Item.find_by(item_key: index2).information.split('/')
+					str_array = Item.find_by(item_key: item_key).information.split('/')
 					break unless !(str_array[3].include? "-") || (str_array[1].to_i <= 0) || (str_array[3].include? "-13") || (str_array[3] == "Quest") || (str_array[0] == "Weeds") || (str_array[3].include? "Minerals") || (str_array[3].include? "Arch")
 				end
-				stock << index2
-				#Implement price later. RNG still required to run to find next item value.
-				rng.next
-				rng.next
-				rng.next_double
+				str_array = Item.find_by(item_key: item_key).information.split('/')
+				item_info << get_item_name(item_key)
+				item_info << [rng.next(1, 11) * 100, str_array[1].to_i * rng.next(3, 6)].max
+				item_info << (rng.next_double < 0.1 ? 5 : 1)
+				stock << item_info
 			end
 		end
 		stock
 	end
 
-	def format_items(item_keys)
-		names = []
-		item_keys.each do |item_key|
-			str_array = Item.find_by(item_key: item_key).information.split('/')
-			names << str_array[0]
-		end
-		names
+	def get_item_name(item_key)
+		str_array = Item.find_by(item_key: item_key).information.split('/')
+		str_array[0]
 	end
+
 
 	def off_limits_for_sale
     [680, 681, 682, 688, 689, 690, 774, 775, 454, 460, 645, 413, 437, 439, 158, 159, 160, 161, 162, 163, 326, 341]
