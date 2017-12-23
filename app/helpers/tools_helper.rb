@@ -72,13 +72,24 @@ module ToolsHelper
 					break unless !(str_array[3].include? "-") || (str_array[1].to_i <= 0) || (str_array[3].include? "-13") || (str_array[3] == "Quest") || (str_array[0] == "Weeds") || (str_array[3].include? "Minerals") || (str_array[3].include? "Arch")
 				end
 				str_array = Item.find_by(item_key: item_key).information.split('/')
-				item_info << get_item_name(item_key)
-				item_info << [rng.next(1, 11) * 100, str_array[1].to_i * rng.next(3, 6)].max
-				item_info << (rng.next_double < 0.1 ? 5 : 1)
+				item_info << get_item_name(item_key) #Item Name
+				item_info << [rng.next(1, 11) * 100, str_array[1].to_i * rng.next(3, 6)].max #Item Price
+				item_info << (rng.next_double < 0.1 ? 5 : 1) # Item Stock
 				stock << item_info
 			end
 
 			# One Random Furniture
+			furniture_info = []
+			furniture_key = 0
+			loop do
+				furniture_key = rng.next(0, 1613)
+				break if !(furniture_off_limits_for_sale.include? furniture_key) && (Furniture.find_by furniture_key: furniture_key)
+			end
+			str_array = Furniture.find_by(furniture_key: furniture_key).information.split('/')
+			furniture_info << str_array[0]
+			furniture_info << rng.next(1,11) * 250
+			furniture_info << 1
+			stock << furniture_info
 		end
 		stock
 	end
@@ -91,5 +102,9 @@ module ToolsHelper
 
 	def off_limits_for_sale
     [680, 681, 682, 688, 689, 690, 774, 775, 454, 460, 645, 413, 437, 439, 158, 159, 160, 161, 162, 163, 326, 341]
+  end
+
+  def furniture_off_limits_for_sale
+  	[1680, 1733, 1669, 1671, 1541, 1545, 1554, 1402, 1466, 1468, 131, 1226, 1298, 1299, 1300, 1301, 1302, 1303, 1304, 1305, 1306, 1307, 1308]
   end
 end
