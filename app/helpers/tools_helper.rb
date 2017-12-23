@@ -55,8 +55,11 @@ module ToolsHelper
 	def cart_stock(game_id, day)
 		stock = []
 		items = Item.all
+
+		# Cart only shows up on Fridays and Sundays
 		if day % 7 == 5 || day % 7 == 0
 			rng = CsRandom.new(game_id + day)
+			# 10 Normal Item Slots
 			(1..10).each do |i|
 				item_info = []
 				item_key = rng.next(2, 790)
@@ -74,6 +77,8 @@ module ToolsHelper
 				item_info << (rng.next_double < 0.1 ? 5 : 1)
 				stock << item_info
 			end
+
+			# One Random Furniture
 		end
 		stock
 	end

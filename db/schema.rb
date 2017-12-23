@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171222010251) do
+ActiveRecord::Schema.define(version: 20171223222352) do
 
   create_table "calendars", force: :cascade do |t|
     t.integer "day"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 20171222010251) do
   end
 
   create_table "cs_randoms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "furnitures", force: :cascade do |t|
+    t.integer "furniture_key"
+    t.string "information"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
