@@ -91,11 +91,19 @@ module ToolsHelper
 			furniture_info << 1
 			stock << furniture_info
 
+			# Rare Seeds appear in the Spring/Summer
 			if season(day) == "Spring" || season(day) == "Summer"
 				item_info = ["Rare Seed", 1000, (rng.next_double < 0.1 ? 5 : 1)]
 				stock << item_info
+			# Rarecrow has a 40% Chance of appearing in the Fall/Winter
 			elsif rng.next_double < 0.4
 				item_info = ["Rarecrow (4 of 8)", 4000, 1]			
+				stock << item_info
+			end
+
+			# Coffee Beans have a 25% Chance of appearing all year
+			if rng.next_double < 0.25
+				item_info = ["Cofee Bean", 2500, 1]
 				stock << item_info
 			end
 		end
