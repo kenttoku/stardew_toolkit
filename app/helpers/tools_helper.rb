@@ -90,6 +90,11 @@ module ToolsHelper
 			furniture_info << rng.next(1,11) * 250
 			furniture_info << 1
 			stock << furniture_info
+
+			if season(day) == "Spring" || season(day) == "Summer"
+				item_info = ["Rare Seed", 1000, (rng.next_double < 0.1 ? 5 : 1)]
+				stock << item_info	
+			end
 		end
 		stock
 	end
