@@ -93,7 +93,10 @@ module ToolsHelper
 
 			if season(day) == "Spring" || season(day) == "Summer"
 				item_info = ["Rare Seed", 1000, (rng.next_double < 0.1 ? 5 : 1)]
-				stock << item_info	
+				stock << item_info
+			elsif rng.next_double < 0.4
+				item_info = ["Rarecrow (4 of 8)", 4000, 1]			
+				stock << item_info
 			end
 		end
 		stock
