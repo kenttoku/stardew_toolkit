@@ -19,4 +19,8 @@ class ToolsController < ApplicationController
     # Temporary Numbers for testing
     @game_id = 173578236
   end
+
+  def grange
+
+  end
 end
